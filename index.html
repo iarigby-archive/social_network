@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Freeuni Programming Project</title>
+  <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/kuzzle-sdk/dist/kuzzle.min.js"></script>
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <button id='mocha-run'>run tests</button>
+
+  <div id="posts">
+
+    <div id="new-post-area">
+      <p>Create a new post!</p>
+      <textarea id="new-post" placeholder="what's up?"></textarea>
+      <button onclick="submitPost()" id="submit-post">
+        post
+      </button>
+
+    </div>
+
+    <p> your posts </p>
+    <div id="your-posts">
+
+    </div>
+    <script src="posts.js"></script>
+  </div>
+
+  <script src="backend.js"></script>
+  <div id="mocha">
+    <script src="http://chaijs.com/chai.js"></script>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script>var expect = chai.expect;mocha.setup('bdd')</script>
+    <script src="posts.spec.js"></script>  
+    <script>document.querySelector('button#mocha-run').onclick = () => mocha.run()</script>
+  </div>
+  <script>
+
+  </script>
+</body>
+
+</html>

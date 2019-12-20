@@ -1,0 +1,43 @@
+body {
+    width: 60%;
+    margin: auto;
+    font-family: sans-serif;
+}
+
+#new-post-area {
+    font-family: sans-serif;
+}
+
+#new-post {
+    height: 100px;
+    width: 100%;
+}
+
+#submit-post {
+    margin: 10px;
+    margin-right: 0px;
+    margin-left: auto;
+    display: block; 
+}
+.post {
+    width: 100%;
+}
+.post-text {
+    display: inline;
+    margin-right: auto;
+}
+
+.delete-post {
+    margin-right: 10px;
+    margin-left: auto;
+}
+
+.post {
+    padding: 10px;
+}
+
+#mocha-run {
+    margin:20px;
+    margin-right: 10px;
+    margin-left: auto;
+}
