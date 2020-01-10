@@ -1,40 +1,32 @@
+// TODO better naming
+const postsBackend = new DatabaseConnection('posts')
+
+
+postsBackend.onConnected = setupPosts
+postsBackend.onNew = addPost
+postsBackend.onDeleted = removePost
+
 function setupPosts() {
     // abstract away, pass only what to do for each element
     // can add to list, whatever
-    return backend.document.search(
-        'social-media',
-        'posts',
-    ).then(r =>
-        addPosts(r._response.hits)
-    ).then(() =>
-        backend.realtime.subscribe(
-            'social-media',
-            'posts',
-            {},
-            p => {
-                if (p.action == "create")
-                    addPost(p.result._source, p.result._id)//addPost()
-                else if (p.action == "delete")
-                    removePost(p.result._id)
-                else
-                    console.log(p)
-            }
-        ))
+    postsBackend.getAll(function(posts) {
+        addPosts(posts)
+    })
 }
 
 function addPosts(posts) {
     posts.forEach(element => {
-        addPost(element._source, element._id)
+        addPost(element)
     });
 }
 
-function addPost(post, postID) {
-    const elem = 
-    `<div class="post" id="${postID}">
+function addPost(post) {
+    const elem =
+        `<div class="post" id="${post.id}">
         <div class="post-text">
             ${post.text}
         </div>
-        <button class="delete-post" onclick='deletePost("${postID}")'> 
+        <button class="delete-post" onclick='deletePost("${post.id}")'> 
             delete
         </button>
     </div>`
@@ -43,27 +35,20 @@ function addPost(post, postID) {
 }
 
 function removePost(postID) {
-    const e = document.querySelector(`div#${postID}`)
+    // const e = document.querySelector(`div#${postID}`)
+    const e = document.getElementById(postID)
     e.parentElement.removeChild(e)
 }
 
 function deletePost(postElem) {
-    backend.document.delete(
-        'social-media',
-        'posts',
-        postElem
-    ).then(id =>
-        console.log(`deleted ${id}`))
+    postsBackend.delete(postElem)
 }
 
 function submitPost() {
     const input = document.querySelector("textarea#new-post")
-    backend.document.create(
-        'social-media',
-        'posts',
-        {
-            text: input.value
-        }
-    )
-    input.value = ""
+    postsBackend.create({
+        text: input.value
+    }, function() {
+        input.value = ""
+    })
 }

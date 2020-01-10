@@ -5,11 +5,10 @@ const backend = new KuzzleSDK.Kuzzle(
 backend.on('networkError', error => {
     console.error('Network Error: ', error);
 });
+
+// TODO log student id
 backend.on('connected', () => {
-    console.log('Successfully connected to Kuzzle');
-});
+    console.log('successfully connected to kuzzle server')
+})
 
 backend.connect()
-    .then(() =>
-        setupPosts()
-    )
