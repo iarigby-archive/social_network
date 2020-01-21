@@ -22,14 +22,18 @@ function addPosts(posts) {
 
 function addPost(post) {
     const elem =
+        /*html*/
         `<div class="post" id="${post.id}">
-        <div class="post-text">
+             <div class="post-text">
             ${post.text}
-        </div>
-        <button class="delete-post" onclick='deletePost("${post.id}")'> 
-            delete
-        </button>
-    </div>`
+            </div>
+            <button class="delete-post" onclick='deletePost("${post.id}")'> 
+                delete
+            </button>
+            <div class="comments    ">
+                
+            </div>
+        </div>`
     const container = document.getElementById('your-posts')
     container.insertAdjacentHTML('afterbegin', elem)
 }

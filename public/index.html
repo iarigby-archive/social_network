@@ -8,7 +8,7 @@
     <title>Freeuni Programming Project</title>
     <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/kuzzle-sdk/dist/kuzzle.min.js"></script>
-    <link href="style.css" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
 
 
     <!-- https://stackoverflow.com/questions/26818091/force-browser-to-reload-index-htm -->
@@ -20,7 +20,11 @@
 </head>
 
 <body>
-    <button id='mocha-run'>run tests</button>
+    <div>
+        <button id='mocha-run'>run tests</button>
+        <span id='mocha-finished'></span>
+
+    </div>
 
     <div id="posts">
 
@@ -28,8 +32,8 @@
             <p>Create a new post!</p>
             <textarea id="new-post" placeholder="what's up?"></textarea>
             <button onclick="submitPost()" id="submit-post">
-        post
-      </button>
+                post
+            </button>
 
         </div>
 
@@ -38,10 +42,11 @@
 
         </div>
     </div>
-
-    <script src="backend.js"></script>
-    <script src="kuzzle-wrapper.js"></script>
-    <script src="posts.js"></script>
+    <div id="user-scripts">
+        <script src="js/backend.js"></script>
+        <script src="libs/kuzzle-wrapper.js"></script>
+        <script src="js/posts.js"></script>
+    </div>
     <div id="mocha">
         <script src="http://chaijs.com/chai.js"></script>
         <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
@@ -49,9 +54,15 @@
             var expect = chai.expect;
             mocha.setup('bdd')
         </script>
-        <script src="posts.spec.js"></script>
+        <div id="test-files">
+            <script src="tests/posts.spec.js"></script>
+        </div>
         <script>
-            document.querySelector('button#mocha-run').onclick = () => mocha.run()
+            function finished() {
+                document.querySelector('span#mocha-finished').innerHTML = 'done'
+            }
+            window.onload = () => mocha.run(finished)
+            // document.querySelector('button#mocha-run').onclick = () => mocha.run()
         </script>
     </div>
     <script>
