@@ -20,10 +20,12 @@
 </head>
 
 <body>
+    <script src="libs/authenticate.js"></script>
     <div>
         <button id='mocha-run'>run tests</button>
         <span id='mocha-finished'></span>
 
+        <button onclick="logOut()">Log Out</button>
     </div>
 
     <div id="posts">
@@ -61,8 +63,8 @@
             function finished() {
                 document.querySelector('span#mocha-finished').innerHTML = 'done'
             }
-            window.onload = () => mocha.run(finished)
-            // document.querySelector('button#mocha-run').onclick = () => mocha.run()
+            // window.onload = () => mocha.run(finished)
+            document.querySelector('button#mocha-run').onclick = () => mocha.run()
         </script>
     </div>
     <script>
